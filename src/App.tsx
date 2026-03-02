@@ -394,6 +394,20 @@ function App() {
               >
                 <Calendar size={20} />
               </button>
+              <button
+                onClick={exportToExcel}
+                className="p-2.5 bg-emerald-600/80 hover:bg-emerald-500 rounded-xl border border-emerald-400/30 transition-all active:scale-95"
+                title="Export to Excel"
+              >
+                <FileSpreadsheet size={20} />
+              </button>
+              <button
+                onClick={exportToPDF}
+                className="p-2.5 bg-red-600/80 hover:bg-red-500 rounded-xl border border-red-400/30 transition-all active:scale-95"
+                title="Export to PDF"
+              >
+                <Download size={20} />
+              </button>
             </div>
           </div>
 
