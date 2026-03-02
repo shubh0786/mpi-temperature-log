@@ -1,0 +1,117 @@
+:root {
+  --bg: #f4f1ec;
+  --bg-grad-1: rgba(0, 46, 109, 0.08);
+  --bg-grad-2: rgba(201, 168, 76, 0.1);
+  --bg-grad-3: rgba(0, 46, 109, 0.06);
+  --bg-grad-4: rgba(201, 168, 76, 0.06);
+
+  --glass-bg: rgba(255, 255, 255, 0.45);
+  --glass-card-bg: rgba(255, 255, 255, 0.5);
+  --glass-strong-bg: rgba(255, 255, 255, 0.6);
+  --glass-border: rgba(0, 46, 109, 0.08);
+  --glass-border-strong: rgba(0, 46, 109, 0.12);
+  --glass-shadow: rgba(0, 46, 109, 0.06);
+  --glass-shine: rgba(255, 255, 255, 0.9);
+
+  --input-bg: rgba(255, 255, 255, 0.6);
+  --input-focus-bg: rgba(255, 255, 255, 0.85);
+  --input-border: rgba(0, 46, 109, 0.12);
+  --input-color: #002e6d;
+  --input-placeholder: rgba(0, 46, 109, 0.3);
+
+  --heading: #002e6d;
+  --primary: #1a2a4a;
+  --secondary: #4a5a7a;
+  --muted: #8a95aa;
+  --gold: #c9a84c;
+}
+
+[data-theme="dark"] {
+  --bg: #0a1628;
+  --bg-grad-1: rgba(0, 46, 109, 0.3);
+  --bg-grad-2: rgba(201, 168, 76, 0.15);
+  --bg-grad-3: rgba(0, 46, 109, 0.2);
+  --bg-grad-4: rgba(201, 168, 76, 0.1);
+
+  --glass-bg: rgba(255, 255, 255, 0.04);
+  --glass-card-bg: rgba(255, 255, 255, 0.06);
+  --glass-strong-bg: rgba(255, 255, 255, 0.08);
+  --glass-border: rgba(201, 168, 76, 0.1);
+  --glass-border-strong: rgba(201, 168, 76, 0.15);
+  --glass-shadow: rgba(0, 0, 0, 0.3);
+  --glass-shine: rgba(201, 168, 76, 0.06);
+
+  --input-bg: rgba(255, 255, 255, 0.06);
+  --input-focus-bg: rgba(255, 255, 255, 0.1);
+  --input-border: rgba(201, 168, 76, 0.15);
+  --input-color: #f0e6cc;
+  --input-placeholder: rgba(201, 168, 76, 0.3);
+
+  --heading: #f0e6cc;
+  --primary: rgba(255, 255, 255, 0.85);
+  --secondary: rgba(201, 168, 76, 0.7);
+  --muted: rgba(255, 255, 255, 0.3);
+}
+
+body {
+  font-family: "Source Sans 3", system-ui, -apple-system, sans-serif;
+  background: var(--bg);
+  background-image:
+    radial-gradient(ellipse at 20% 40%, var(--bg-grad-1) 0%, transparent 55%),
+    radial-gradient(ellipse at 80% 15%, var(--bg-grad-2) 0%, transparent 55%),
+    radial-gradient(ellipse at 45% 90%, var(--bg-grad-3) 0%, transparent 55%),
+    radial-gradient(ellipse at 75% 65%, var(--bg-grad-4) 0%, transparent 50%);
+}
+
+.font-brand {
+  font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+}
+
+.tc-heading { color: var(--heading); }
+.tc-primary { color: var(--primary); }
+.tc-secondary { color: var(--secondary); }
+.tc-muted { color: var(--muted); }
+
+.glass {
+  background: var(--glass-bg);
+  -webkit-backdrop-filter: blur(20px) saturate(150%);
+  backdrop-filter: blur(20px) saturate(150%);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 4px 24px var(--glass-shadow), inset 0 1px 0 var(--glass-shine);
+}
+
+.glass-card {
+  background: var(--glass-card-bg);
+  -webkit-backdrop-filter: blur(40px) saturate(180%);
+  backdrop-filter: blur(40px) saturate(180%);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 8px 32px var(--glass-shadow), inset 0 1px 0 var(--glass-shine);
+}
+
+.glass-strong {
+  background: var(--glass-strong-bg);
+  -webkit-backdrop-filter: blur(40px) saturate(200%);
+  backdrop-filter: blur(40px) saturate(200%);
+  border: 1px solid var(--glass-border-strong);
+  box-shadow: 0 8px 32px var(--glass-shadow), inset 0 1px 0 var(--glass-shine);
+}
+
+.glass-input {
+  background: var(--input-bg);
+  border: 1px solid var(--input-border);
+  color: var(--input-color);
+  transition: all 0.2s ease;
+}
+
+.glass-input::placeholder { color: var(--input-placeholder); }
+
+.btn-accent {
+  background: linear-gradient(135deg, #002e6d, #003d8f);
+  border: 1px solid rgba(0, 46, 109, 0.3);
+  color: #fff;
+}
+
+.btn-glass {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--glass-border);
+}

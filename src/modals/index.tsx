@@ -1,7 +1,7 @@
 import { useState, useRef } from 'react';
 import { Plus, Pencil, Calendar, Trash2, Download, Upload, AlertTriangle, FileSpreadsheet, CalendarDays, CalendarRange } from 'lucide-react';
 import { useApp } from '../AppContext';
-import { ACCENT, UNIT_PRESETS } from '../types';
+import { UNIT_PRESETS } from '../types';
 import { format, startOfWeek, startOfMonth, endOfMonth, addDays, parseISO } from 'date-fns';
 
 function ModalShell({ onClose, children }: { onClose: () => void; children: React.ReactNode }) {
@@ -25,7 +25,7 @@ export function AddUnitModal({ onClose }: { onClose: () => void }) {
   const submit = () => { if (!name.trim()) return; addUnit(name.trim(), parseFloat(min) || 0, parseFloat(max) || 5); onClose(); };
   return (
     <ModalShell onClose={onClose}>
-      <h2 className="text-lg font-bold mb-4" style={{ color: ACCENT }}><Plus size={18} className="inline mr-2" />Add Fridge / Chiller</h2>
+      <h2 className="text-lg font-bold mb-4 tc-accent"><Plus size={18} className="inline mr-2" />Add Fridge / Chiller</h2>
       <div className="flex gap-2 mb-4">
         {UNIT_PRESETS.map(p => (
           <button key={p.label} onClick={() => { if (!name) setName(p.label + ' ' + (Math.floor(Math.random() * 9) + 1)); setMin(String(p.min)); setMax(String(p.max)); }}
@@ -59,7 +59,7 @@ export function EditUnitModal({ unitId, onClose }: { unitId: string; onClose: ()
   const submit = () => { if (!name.trim()) return; updateUnit(unitId, name.trim(), parseFloat(min) || 0, parseFloat(max) || 5); onClose(); };
   return (
     <ModalShell onClose={onClose}>
-      <h2 className="text-lg font-bold mb-4" style={{ color: ACCENT }}><Pencil size={16} className="inline mr-2" />Edit Unit</h2>
+      <h2 className="text-lg font-bold mb-4 tc-accent"><Pencil size={16} className="inline mr-2" />Edit Unit</h2>
       <label className="block text-sm font-semibold tc-secondary mb-1">Name</label>
       <input type="text" value={name} onChange={e => setName(e.target.value)} className="glass-input w-full px-4 py-3 rounded-xl text-sm font-medium outline-none mb-3"
         autoFocus onKeyDown={e => e.key === 'Enter' && submit()} />
@@ -95,7 +95,7 @@ export function BulkUpdateModal({ onClose }: { onClose: () => void }) {
   const submit = () => { doBulkUpdate(from, to, unitId, temp); onClose(); };
   return (
     <ModalShell onClose={onClose}>
-      <h2 className="text-lg font-bold mb-4" style={{ color: ACCENT }}><Calendar size={18} className="inline mr-2" />Bulk Update</h2>
+      <h2 className="text-lg font-bold mb-4 tc-accent"><Calendar size={18} className="inline mr-2" />Bulk Update</h2>
       <div className="space-y-3 mb-5">
         <div><label htmlFor="bf" className="block text-sm font-semibold tc-secondary mb-1">From</label><input id="bf" type="date" value={from} onChange={e => setFrom(e.target.value)} className="glass-input w-full px-4 py-3 rounded-xl text-sm font-medium outline-none" /></div>
         <div><label htmlFor="bt" className="block text-sm font-semibold tc-secondary mb-1">To</label><input id="bt" type="date" value={to} onChange={e => setTo(e.target.value)} className="glass-input w-full px-4 py-3 rounded-xl text-sm font-medium outline-none" /></div>
@@ -127,7 +127,7 @@ export function BackupRestoreModal({ onClose }: { onClose: () => void }) {
   };
   return (
     <ModalShell onClose={onClose}>
-      <h2 className="text-lg font-bold mb-4" style={{ color: ACCENT }}>Backup & Restore</h2>
+      <h2 className="text-lg font-bold mb-4 tc-accent">Backup & Restore</h2>
       <div className="space-y-3 mb-4">
         <button onClick={exportBackup} className="w-full flex items-center justify-center gap-2 py-3 rounded-xl font-bold text-sm btn-glass tc-primary transition-all active:scale-[0.97]">
           <Download size={16} /> Download Backup (JSON)
@@ -174,7 +174,7 @@ export function ExportModal({ baseDate, onClose }: { baseDate: string; onClose: 
 
   return (
     <ModalShell onClose={onClose}>
-      <h2 className="text-lg font-bold mb-4" style={{ color: ACCENT }}><Download size={18} className="inline mr-2" />Export Data</h2>
+      <h2 className="text-lg font-bold mb-4 tc-accent"><Download size={18} className="inline mr-2" />Export Data</h2>
 
       <label className="block text-sm font-semibold tc-secondary mb-2">Select Period</label>
       <div className="flex gap-2 mb-4">

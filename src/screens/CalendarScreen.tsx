@@ -2,7 +2,7 @@ import { useState, useMemo } from 'react';
 import { format, startOfMonth, endOfMonth, startOfWeek, endOfWeek, addDays, addMonths, subMonths, isSameMonth, isToday } from 'date-fns';
 import { ArrowLeft, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useApp } from '../AppContext';
-import { ACCENT } from '../types';
+// accent via tc-accent CSS
 
 export function CalendarScreen() {
   const { units, getTemp, setScreen } = useApp();
@@ -46,9 +46,9 @@ export function CalendarScreen() {
         {/* Month nav */}
         <div className="glass-strong rounded-2xl p-4 mb-4 animate-fade-in-up">
           <div className="flex items-center justify-between">
-            <button onClick={() => setCurrentMonth(subMonths(currentMonth, 1))} className="p-2.5 rounded-xl hover:bg-black/5 transition-all active:scale-95" style={{ color: ACCENT }} title="Previous month"><ChevronLeft size={22} /></button>
+            <button onClick={() => setCurrentMonth(subMonths(currentMonth, 1))} className="p-2.5 rounded-xl hover:bg-black/5 transition-all active:scale-95 tc-accent" title="Previous month"><ChevronLeft size={22} /></button>
             <h3 className="text-lg font-bold tc-heading">{format(currentMonth, 'MMMM yyyy')}</h3>
-            <button onClick={() => setCurrentMonth(addMonths(currentMonth, 1))} className="p-2.5 rounded-xl hover:bg-black/5 transition-all active:scale-95" style={{ color: ACCENT }} title="Next month"><ChevronRight size={22} /></button>
+            <button onClick={() => setCurrentMonth(addMonths(currentMonth, 1))} className="p-2.5 rounded-xl hover:bg-black/5 transition-all active:scale-95 tc-accent" title="Next month"><ChevronRight size={22} /></button>
           </div>
         </div>
 

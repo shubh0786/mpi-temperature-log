@@ -1,37 +1,9 @@
 import { useMemo, useEffect } from 'react';
-import type React from 'react';
 import { ACCENT, GOLD, CONFETTI_COLORS } from '../types';
 
-export const AuroraBackground = () => (
-  <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
-    <div className="aurora-orb aurora-orb-1" />
-    <div className="aurora-orb aurora-orb-2" />
-    <div className="aurora-orb aurora-orb-3" />
-    <div className="aurora-orb aurora-orb-4" />
-  </div>
-);
+export const AuroraBackground = () => null;
 
-export const IceCrystals = () => {
-  const c = useMemo(() => Array.from({ length: 14 }, (_, i) => ({
-    id: i, left: Math.random() * 100, dur: 10 + Math.random() * 12, del: Math.random() * 15,
-    size: 12 + Math.random() * 18, opacity: 0.05 + Math.random() * 0.12, shape: i % 4,
-  })), []);
-  return (
-    <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
-      {c.map(x => (
-        <div key={x.id} className="absolute animate-crystal-fall"
-          style={{ left: `${x.left}%`, '--dur': `${x.dur}s`, '--del': `${x.del}s` } as React.CSSProperties}>
-          <svg width={x.size} height={x.size} viewBox="0 0 24 24" style={{ opacity: x.opacity }}>
-            {x.shape === 0 && <polygon points="12,1 15,9 23,9 17,14 19,22 12,17 5,22 7,14 1,9 9,9" fill="none" stroke="rgba(0,46,109,0.4)" strokeWidth="0.6" />}
-            {x.shape === 1 && <polygon points="12,2 22,12 12,22 2,12" fill="none" stroke="rgba(201,168,76,0.35)" strokeWidth="0.6" />}
-            {x.shape === 2 && <polygon points="12,2 21,7 21,17 12,22 3,17 3,7" fill="none" stroke="rgba(0,46,109,0.35)" strokeWidth="0.6" />}
-            {x.shape === 3 && <circle cx="12" cy="12" r="8" fill="none" stroke="rgba(201,168,76,0.25)" strokeWidth="0.5" />}
-          </svg>
-        </div>
-      ))}
-    </div>
-  );
-};
+export const IceCrystals = () => null;
 
 export const ThermometerHero = ({ size = 150, className = '' }: { size?: number; className?: string }) => (
   <svg viewBox="0 0 80 160" width={size * 0.5} height={size} className={className}>
@@ -94,12 +66,12 @@ export const ColdVapor = () => (
 );
 
 export const SuccessCheck = ({ size = 110 }: { size?: number }) => (
-  <div className="relative" style={{ width: size, height: size }}>
-    <div className="absolute inset-0 rounded-full animate-burst-1" style={{ border: `3px solid rgba(0,46,109,0.2)` }} />
-    <div className="absolute inset-0 rounded-full animate-burst-2" style={{ border: `2px solid ${GOLD}40` }} />
-    <svg viewBox="0 0 100 100" width={size} height={size}>
-      <circle cx="50" cy="50" r="38" fill="none" stroke={ACCENT} strokeWidth="3" className="animate-draw-circle" />
-      <path d="M30 52 L44 66 L72 34" fill="none" stroke={GOLD} strokeWidth="4.5" strokeLinecap="round" strokeLinejoin="round" className="animate-draw-check" />
+  <div className="relative flex items-center justify-center" style={{ width: size, height: size }}>
+    <div className="absolute inset-0 rounded-full animate-burst-1" style={{ border: `3px solid rgba(0,46,109,0.15)` }} />
+    <div className="absolute inset-0 rounded-full animate-burst-2" style={{ border: `2px solid ${GOLD}30` }} />
+    <svg viewBox="0 0 100 100" width={size} height={size} className="block">
+      <circle cx="50" cy="50" r="40" fill="none" stroke={ACCENT} strokeWidth="2.5" className="animate-draw-circle" />
+      <path d="M32 50 L45 63 L68 37" fill="none" stroke={GOLD} strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" className="animate-draw-check" />
     </svg>
   </div>
 );

@@ -3,7 +3,7 @@ import { format, parseISO } from 'date-fns';
 import { CheckCircle2, StickyNote, AlertTriangle } from 'lucide-react';
 import { useApp } from '../AppContext';
 import { SuccessCheck, CelebrationOverlay } from '../components/visuals';
-import { ACCENT } from '../types';
+// accent color via tc-accent CSS class
 
 export function CompleteScreen() {
   const { units, getTemp, getTempStatus, getCorrectiveAction, recorder, setScreen } = useApp();
@@ -29,7 +29,7 @@ export function CompleteScreen() {
         {showCelebration && <CelebrationOverlay onDone={hideCelebration} />}
         <div className="w-full max-w-md text-center animate-scale-in">
           <div className="animate-pop-in mb-4" style={{ animationDelay: '0.2s' }}>
-            <div className="w-20 h-20 mx-auto rounded-full flex items-center justify-center glass"><CheckCircle2 size={40} style={{ color: ACCENT }} /></div>
+            <div className="w-20 h-20 mx-auto rounded-full flex items-center justify-center glass"><CheckCircle2 size={40} className="tc-accent" /></div>
           </div>
           <h2 className="text-3xl font-bold mb-2 animate-fade-in-up tc-heading" style={{ animationDelay: '0.4s' }}>All Done!</h2>
           <p className="text-sm mb-8 animate-fade-in-up tc-muted" style={{ animationDelay: '0.5s' }}>Log saved for {format(parseISO(selectedDate), 'EEEE, d MMM')} by {recorder}</p>
@@ -71,14 +71,14 @@ export function CompleteScreen() {
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
                       {status === 'warn' ? <AlertTriangle size={16} className="text-amber-500" />
-                        : t ? <CheckCircle2 size={16} style={{ color: ACCENT }} />
+                        : t ? <CheckCircle2 size={16} className="tc-accent" />
                         : <div className="w-4 h-4 rounded-full border-2" style={{ borderColor: 'var(--divider)' }} />}
                       <div>
                         <span className="font-semibold text-sm tc-primary">{u.name}</span>
                         <span className="text-xs tc-muted ml-2">({u.minTemp} to {u.maxTemp}°C)</span>
                       </div>
                     </div>
-                    <span className="font-bold" style={{ color: status === 'warn' ? '#f59e0b' : t ? ACCENT : 'var(--pill-inactive-text)' }}>
+                    <span className={`font-bold ${status === 'warn' ? 'text-amber-500' : t ? 'tc-accent' : ''}`} style={!t && status !== 'warn' ? { color: 'var(--pill-inactive-text)' } : undefined}>
                       {t ? `${t}°C` : '—'}
                     </span>
                   </div>
@@ -90,7 +90,7 @@ export function CompleteScreen() {
         </div>
 
         <div className="glass-strong rounded-2xl p-4 mb-4 animate-fade-in-up" style={{ animationDelay: '0.85s' }}>
-          <label className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest mb-2" style={{ color: ACCENT }}>
+          <label className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest mb-2 tc-accent">
             <StickyNote size={14} /> Add a note (optional)
           </label>
           <textarea value={completeNote} onChange={e => setCompleteNote(e.target.value)}

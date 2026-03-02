@@ -3,7 +3,7 @@ import { format, subDays } from 'date-fns';
 import { ArrowLeft, TrendingUp, AlertTriangle } from 'lucide-react';
 import { useApp } from '../AppContext';
 import { SimpleChart } from '../components/SimpleChart';
-import { ACCENT } from '../types';
+// accent via tc-accent CSS
 
 export function DashboardScreen() {
   const { units, getTemp, getTempStatus, setScreen } = useApp();
@@ -78,8 +78,8 @@ export function DashboardScreen() {
         {/* Chart */}
         <div className="glass-strong rounded-2xl p-4 mb-4 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
           <div className="flex items-center gap-2 mb-3">
-            <TrendingUp size={16} style={{ color: ACCENT }} />
-            <span className="text-sm font-bold" style={{ color: ACCENT }}>Temperature Trends</span>
+            <TrendingUp size={16} className="tc-accent" />
+            <span className="text-sm font-bold tc-accent">Temperature Trends</span>
           </div>
           <SimpleChart data={chartData} unitNames={units.map(u => ({ id: u.id, name: u.name }))} height={220} />
         </div>
@@ -87,7 +87,7 @@ export function DashboardScreen() {
         {/* Unit averages */}
         <div className="glass-strong rounded-2xl overflow-hidden mb-4 animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
           <div className="px-4 py-3" style={{ borderBottom: '1px solid var(--divider)' }}>
-            <span className="text-sm font-bold" style={{ color: ACCENT }}>Unit Averages ({period} days)</span>
+            <span className="text-sm font-bold tc-accent">Unit Averages ({period} days)</span>
           </div>
           <div className="divide-y" style={{ borderColor: 'var(--divider)' }}>
             {stats.unitAvgs.map(ua => (

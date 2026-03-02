@@ -3,7 +3,6 @@ import { format, subDays, addDays, parseISO, isToday, startOfWeek } from 'date-f
 import { ArrowLeft, ChevronLeft, ChevronRight, Plus, Calendar, Pencil, Trash2, CheckCircle2, Download, StickyNote, AlertTriangle, BarChart3 } from 'lucide-react';
 import { useApp } from '../AppContext';
 import { AddUnitModal, EditUnitModal, BulkUpdateModal, ExportModal } from '../modals';
-import { ACCENT } from '../types';
 
 export function RecordsScreen() {
   const { units, getTemp, setTemp, getTempStatus, getCorrectiveAction, getNote, setNoteText, deleteUnit, setScreen } = useApp();
@@ -36,38 +35,37 @@ export function RecordsScreen() {
   return (
     <div className="relative z-10 min-h-screen px-4 py-5">
       <div className="max-w-2xl mx-auto">
-        {/* Header */}
-        <div className="flex items-center justify-between mb-4 animate-fade-in-down">
-          <button onClick={() => setScreen('home')} className="p-2 rounded-xl tc-muted hover:tc-primary hover:bg-black/5 transition-all active:scale-95" title="Home"><ArrowLeft size={22} /></button>
+        <div className="flex items-center justify-between mb-4">
+          <button onClick={() => setScreen('home')} className="p-2 rounded-xl tc-muted hover:tc-primary hover:bg-black/5 transition-all" title="Home"><ArrowLeft size={22} /></button>
           <h2 className="text-lg font-bold tc-heading">Daily Records</h2>
           <div className="flex gap-1.5 no-print">
-            <button onClick={() => setShowAdd(true)} className="p-2 rounded-xl tc-muted hover:tc-primary hover:bg-black/5 transition-all active:scale-95" title="Add unit"><Plus size={18} /></button>
-            <button onClick={() => setShowBulk(true)} className="p-2 rounded-xl tc-muted hover:tc-primary hover:bg-black/5 transition-all active:scale-95" title="Bulk update"><Calendar size={18} /></button>
+            <button onClick={() => setShowAdd(true)} className="p-2 rounded-xl tc-muted hover:tc-primary hover:bg-black/5 transition-all" title="Add unit"><Plus size={18} /></button>
+            <button onClick={() => setShowBulk(true)} className="p-2 rounded-xl tc-muted hover:tc-primary hover:bg-black/5 transition-all" title="Bulk update"><Calendar size={18} /></button>
           </div>
         </div>
 
         {/* Date nav */}
-        <div className="glass-strong rounded-2xl p-4 mb-4 animate-fade-in-up">
+        <div className="glass-strong rounded-2xl p-4 mb-4">
           <div className="flex items-center justify-between gap-2">
-            <button onClick={() => setDate(format(subDays(parseISO(date), 1), 'yyyy-MM-dd'))} className="p-2.5 rounded-xl hover:bg-black/5 transition-all active:scale-95 shrink-0" style={{ color: ACCENT }} title="Previous day"><ChevronLeft size={22} /></button>
+            <button onClick={() => setDate(format(subDays(parseISO(date), 1), 'yyyy-MM-dd'))} className="p-2.5 rounded-xl hover:bg-black/5 transition-all shrink-0 tc-accent" title="Previous day"><ChevronLeft size={22} /></button>
             <div className="text-center min-w-0">
-              <input type="date" value={date} onChange={e => setDate(e.target.value)} className="text-lg font-bold text-center bg-transparent outline-none cursor-pointer w-full" style={{ color: ACCENT }} title="Select date" />
+              <input type="date" value={date} onChange={e => setDate(e.target.value)} className="text-lg font-bold text-center bg-transparent outline-none cursor-pointer w-full tc-accent" title="Select date" />
               <p className="text-xs font-medium mt-0.5 tc-muted">
                 {format(parseISO(date), 'EEEE')}
-                {isToday(parseISO(date)) && <span className="ml-2 text-xs px-2 py-0.5 rounded-full font-bold" style={{ background: 'rgba(99,102,241,0.08)', color: ACCENT }}>Today</span>}
+                {isToday(parseISO(date)) && <span className="ml-2 text-xs px-2 py-0.5 rounded-full font-bold tc-accent" style={{ background: 'var(--pill-inactive-bg)' }}>Today</span>}
               </p>
             </div>
-            <button onClick={() => setDate(format(addDays(parseISO(date), 1), 'yyyy-MM-dd'))} className="p-2.5 rounded-xl hover:bg-black/5 transition-all active:scale-95 shrink-0" style={{ color: ACCENT }} title="Next day"><ChevronRight size={22} /></button>
+            <button onClick={() => setDate(format(addDays(parseISO(date), 1), 'yyyy-MM-dd'))} className="p-2.5 rounded-xl hover:bg-black/5 transition-all shrink-0 tc-accent" title="Next day"><ChevronRight size={22} /></button>
           </div>
           {!isToday(parseISO(date)) && (
-            <button onClick={() => setDate(format(new Date(), 'yyyy-MM-dd'))} className="w-full mt-3 py-2 text-xs font-bold rounded-xl transition-all active:scale-[0.98]" style={{ color: ACCENT, background: 'rgba(99,102,241,0.05)' }}>Go to Today</button>
+            <button onClick={() => setDate(format(new Date(), 'yyyy-MM-dd'))} className="w-full mt-3 py-2 text-xs font-bold rounded-xl transition-all tc-accent" style={{ background: 'var(--pill-inactive-bg)' }}>Go to Today</button>
           )}
         </div>
 
         {/* Temps */}
-        <div className="glass-strong rounded-2xl overflow-hidden mb-4 animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
+        <div className="glass-strong rounded-2xl overflow-hidden mb-4">
           <div className="flex items-center gap-2 px-4 py-3" style={{ borderBottom: '1px solid var(--divider)' }}>
-            <span className="text-sm font-bold" style={{ color: ACCENT }}>Temperatures</span>
+            <span className="text-sm font-bold tc-accent">Temperatures</span>
             <span className="ml-auto text-xs font-semibold tc-muted">{units.filter(u => getTemp(u.id, date)).length}/{units.length}</span>
           </div>
           {units.length === 0 ? (
@@ -83,7 +81,7 @@ export function RecordsScreen() {
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-3 min-w-0">
                         {status === 'warn' ? <AlertTriangle size={16} className="text-amber-500 shrink-0" />
-                          : t ? <CheckCircle2 size={16} style={{ color: ACCENT }} className="shrink-0" />
+                          : t ? <CheckCircle2 size={16} className="tc-accent shrink-0" />
                           : <div className="w-4 h-4 rounded-full border-2 shrink-0" style={{ borderColor: 'var(--divider)' }} />}
                         <div className="min-w-0">
                           <span className="font-semibold text-sm truncate block tc-primary">{u.name}</span>
@@ -109,8 +107,8 @@ export function RecordsScreen() {
         </div>
 
         {/* Notes */}
-        <div className="glass-strong rounded-2xl p-4 mb-4 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
-          <label className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest mb-2" style={{ color: ACCENT }}><StickyNote size={14} /> Notes for {format(parseISO(date), 'EEE dd/MM')}</label>
+        <div className="glass-strong rounded-2xl p-4 mb-4">
+          <label className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest mb-2 tc-accent"><StickyNote size={14} /> Notes for {format(parseISO(date), 'EEE dd/MM')}</label>
           <textarea value={getNote(date)?.note || ''} onChange={e => setNoteText(date, e.target.value)}
             className="w-full p-3 rounded-xl text-sm font-medium outline-none resize-none glass-input transition-all" rows={2} placeholder="Any problems or notes..." />
           {getNote(date)?.recorder && <p className="text-xs mt-1.5 tc-muted">By: <span className="font-semibold tc-secondary">{getNote(date)?.recorder}</span></p>}
@@ -118,9 +116,9 @@ export function RecordsScreen() {
 
         {/* Weekly Summary Toggle */}
         <button onClick={() => setShowWeekly(!showWeekly)}
-          className="w-full glass-strong rounded-2xl p-4 mb-4 text-left hover:bg-black/3 transition-all animate-fade-in-up" style={{ animationDelay: '0.25s' }}>
+          className="w-full glass-strong rounded-2xl p-4 mb-4 text-left hover:bg-black/3 transition-all">
           <div className="flex items-center justify-between">
-            <span className="flex items-center gap-2 text-sm font-bold" style={{ color: ACCENT }}><BarChart3 size={16} /> Weekly Summary</span>
+            <span className="flex items-center gap-2 text-sm font-bold tc-accent"><BarChart3 size={16} /> Weekly Summary</span>
             <span className="text-xs font-bold tc-muted">{format(weekStart, 'dd/MM')} — {format(addDays(weekStart, 6), 'dd/MM')}</span>
           </div>
           <div className="flex gap-4 mt-2">
@@ -130,9 +128,8 @@ export function RecordsScreen() {
           </div>
         </button>
 
-        {/* Weekly Summary Table */}
         {showWeekly && (
-          <div className="glass-strong rounded-2xl overflow-hidden mb-4 animate-fade-in-up overflow-x-auto">
+          <div className="glass-strong rounded-2xl overflow-hidden mb-4 overflow-x-auto">
             <table className="w-full text-xs">
               <thead>
                 <tr>
@@ -162,8 +159,8 @@ export function RecordsScreen() {
         )}
 
         {/* Export */}
-        <div className="mb-4 no-print animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
-          <button onClick={() => setShowExport(true)} className="w-full flex items-center justify-center gap-2 py-3.5 rounded-xl font-bold text-sm btn-glass tc-secondary transition-all active:scale-[0.97]">
+        <div className="mb-4 no-print">
+          <button onClick={() => setShowExport(true)} className="w-full flex items-center justify-center gap-2 py-3.5 rounded-xl font-bold text-sm btn-glass tc-secondary transition-all">
             <Download size={16} /> Export Data (Excel / PDF)
           </button>
         </div>
